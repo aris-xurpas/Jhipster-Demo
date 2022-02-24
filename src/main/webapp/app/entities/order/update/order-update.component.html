@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-order-heading" data-cy="OrderCreateUpdateHeading" jhiTranslate="restoJhipsterJenkinsApp.order.home.createOrEditLabel">
+        Create or edit a Order
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="restoJhipsterJenkinsApp.order.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'restoJhipsterJenkinsApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">
+              {{ 'restoJhipsterJenkinsApp.Status.' + status | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="restoJhipsterJenkinsApp.order.dateOrdered" for="field_dateOrdered"
+            >Date Ordered</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateOrdered"
+              data-cy="dateOrdered"
+              type="text"
+              class="form-control"
+              name="dateOrdered"
+              ngbDatepicker
+              #dateOrderedDp="ngbDatepicker"
+              formControlName="dateOrdered"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateOrderedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="restoJhipsterJenkinsApp.order.discount" for="field_discount">Discount</label>
+          <select class="form-control" id="field_discount" data-cy="discount" name="discount" formControlName="discount">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="discountOption.id === editForm.get('discount')!.value?.id ? editForm.get('discount')!.value : discountOption"
+              *ngFor="let discountOption of discountsCollection; trackBy: trackDiscountById"
+            >
+              {{ discountOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="restoJhipsterJenkinsApp.order.cashier" for="field_cashier">Cashier</label>
+          <select class="form-control" id="field_cashier" data-cy="cashier" name="cashier" formControlName="cashier">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="staffOption.id === editForm.get('cashier')!.value?.id ? editForm.get('cashier')!.value : staffOption"
+              *ngFor="let staffOption of cashiersCollection; trackBy: trackStaffById"
+            >
+              {{ staffOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="restoJhipsterJenkinsApp.order.payment" for="field_payment">Payment</label>
+          <select class="form-control" id="field_payment" data-cy="payment" name="payment" formControlName="payment">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="paymentOption.id === editForm.get('payment')!.value?.id ? editForm.get('payment')!.value : paymentOption"
+              *ngFor="let paymentOption of paymentsCollection; trackBy: trackPaymentById"
+            >
+              {{ paymentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

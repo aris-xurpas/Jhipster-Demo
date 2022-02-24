@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="order">
+      <h2 data-cy="orderDetailsHeading"><span jhiTranslate="restoJhipsterJenkinsApp.order.detail.title">Order</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ order.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="restoJhipsterJenkinsApp.order.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'restoJhipsterJenkinsApp.Status.' + order.status }}">{{ order.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="restoJhipsterJenkinsApp.order.dateOrdered">Date Ordered</span></dt>
+        <dd>
+          <span>{{ order.dateOrdered | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="restoJhipsterJenkinsApp.order.discount">Discount</span></dt>
+        <dd>
+          <div *ngIf="order.discount">
+            <a [routerLink]="['/discount', order.discount?.id, 'view']">{{ order.discount?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="restoJhipsterJenkinsApp.order.cashier">Cashier</span></dt>
+        <dd>
+          <div *ngIf="order.cashier">
+            <a [routerLink]="['/staff', order.cashier?.id, 'view']">{{ order.cashier?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="restoJhipsterJenkinsApp.order.payment">Payment</span></dt>
+        <dd>
+          <div *ngIf="order.payment">
+            <a [routerLink]="['/payment', order.payment?.id, 'view']">{{ order.payment?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

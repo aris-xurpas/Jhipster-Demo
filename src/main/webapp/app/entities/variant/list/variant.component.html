@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="VariantHeading">
+    <span jhiTranslate="restoJhipsterJenkinsApp.variant.home.title">Variants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="restoJhipsterJenkinsApp.variant.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-variant"
+        [routerLink]="['/variant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="restoJhipsterJenkinsApp.variant.home.createLabel"> Create a new Variant </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="variants?.length === 0">
+    <span jhiTranslate="restoJhipsterJenkinsApp.variant.home.notFound">No variants found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="variants && variants.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="restoJhipsterJenkinsApp.variant.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="price">
+            <span jhiTranslate="restoJhipsterJenkinsApp.variant.price">Price</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="item.id">
+            <span jhiTranslate="restoJhipsterJenkinsApp.variant.item">Item</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let variant of variants; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/variant', variant.id, 'view']">{{ variant.id }}</a>
+          </td>
+          <td>{{ variant.name }}</td>
+          <td>{{ variant.price }}</td>
+          <td>
+            <div *ngIf="variant.item">
+              <a [routerLink]="['/item', variant.item?.id, 'view']">{{ variant.item?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/variant', variant.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/variant', variant.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(variant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Order.
+    -->
+    <changeSet id="20220224053747-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="discount_id"
+                                 baseTableName="jhi_order"
+                                 constraintName="fk_jhi_order__discount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="discount"/>
+
+        <addForeignKeyConstraint baseColumnNames="cashier_id"
+                                 baseTableName="jhi_order"
+                                 constraintName="fk_jhi_order__cashier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="staff"/>
+
+        <addForeignKeyConstraint baseColumnNames="payment_id"
+                                 baseTableName="jhi_order"
+                                 constraintName="fk_jhi_order__payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment"/>
+    </changeSet>
+</databaseChangeLog>

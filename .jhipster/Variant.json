@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220224053745",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "variant",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Variant",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "variants",
+      "relationshipName": "item",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

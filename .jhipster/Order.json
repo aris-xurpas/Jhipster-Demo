@@ -1,0 +1,59 @@
+{
+  "applications": "*",
+  "changelogDate": "20220224053747",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "jhi_order",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "OPEN,CANCELLED,DONE"
+    },
+    {
+      "fieldName": "dateOrdered",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Order",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "discount",
+      "otherEntityRelationshipName": "order",
+      "ownerSide": true,
+      "relationshipName": "discount",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "staff",
+      "otherEntityRelationshipName": "order",
+      "ownerSide": true,
+      "relationshipName": "cashier",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "payment",
+      "otherEntityRelationshipName": "order",
+      "ownerSide": true,
+      "relationshipName": "payment",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "items",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "orders",
+      "relationshipName": "customer",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

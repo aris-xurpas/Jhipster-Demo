@@ -1,0 +1,10 @@
+{
+  "restoJhipsterJenkinsApp": {
+    "Status": {
+      "null": "",
+      "OPEN": "OPEN",
+      "CANCELLED": "CANCELLED",
+      "DONE": "DONE"
+    }
+  }
+}

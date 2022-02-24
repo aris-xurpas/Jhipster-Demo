@@ -1,0 +1,62 @@
+entity Staff {
+	name String
+}
+
+enum Status {
+	OPEN,
+    CANCELLED,
+    DONE
+}
+
+entity Item {
+	name String
+    price Integer
+}
+
+entity Variant {
+	name String
+    price Integer
+}
+
+entity Category {
+	name String
+}
+
+entity Order {
+	status Status	
+    dateOrdered LocalDate
+}
+
+entity Payment {
+	amountPaid Float
+    datePaid LocalDate
+}
+
+entity Discount{
+	description String
+    rate Integer
+    fixedAmount Integer
+}
+
+entity Customer {
+	name String
+    contactNumber String
+}
+
+relationship OneToOne {
+	Item{category} to Category{item}
+	Order{discount} to Discount{order}
+    Order{cashier} to Staff{order}
+    Order{payment} to Payment{order}
+}
+
+relationship OneToMany {
+	Order{items} to Item{order}
+	Item{variants} to Variant{item}
+}
+
+relationship ManyToOne {
+	Customer{orders} to Order{customer}
+}
+
+paginate Order, Item, Category, Variant with infinite-scroll
