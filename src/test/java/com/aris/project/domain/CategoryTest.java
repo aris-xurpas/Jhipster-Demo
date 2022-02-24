@@ -1,7 +1,6 @@
 package com.aris.project.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import com.aris.project.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
@@ -20,10 +19,5 @@ class CategoryTest {
         assertThat(category1).isNotEqualTo(category2);
         category1.setId(null);
         assertThat(category1).isNotEqualTo(category2);
-    }
-
-    @Test
-    public void test1() {
-        assertTrue(false);
     }
 }
