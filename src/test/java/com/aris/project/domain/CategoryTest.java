@@ -23,6 +23,6 @@ class CategoryTest {
 
     @Test
     void failIt() {
-        assertTru(false);
+        assertTrue(false);
     }
 }
