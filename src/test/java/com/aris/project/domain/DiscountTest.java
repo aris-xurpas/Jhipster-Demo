@@ -1,6 +1,7 @@
 package com.aris.project.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import com.aris.project.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
@@ -19,5 +20,10 @@ class DiscountTest {
         assertThat(discount1).isNotEqualTo(discount2);
         discount1.setId(null);
         assertThat(discount1).isNotEqualTo(discount2);
+    }
+
+    @Test
+    public void failThis() {
+        assertTrue(false);
     }
 }
