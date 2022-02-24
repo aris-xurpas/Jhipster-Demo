@@ -1,6 +1,7 @@
 package com.aris.project.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import com.aris.project.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class CategoryTest {
     }
 
     @Test
-    void failIt() {
+    public void failIt() {
         assertTrue(false);
     }
 }
