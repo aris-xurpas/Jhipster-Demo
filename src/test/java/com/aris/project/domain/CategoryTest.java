@@ -21,9 +21,4 @@ class CategoryTest {
         category1.setId(null);
         assertThat(category1).isNotEqualTo(category2);
     }
-
-    @Test
-    public void failIt() {
-        assertTrue(false);
-    }
 }
