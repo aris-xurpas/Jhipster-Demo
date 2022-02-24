@@ -20,4 +20,9 @@ class CategoryTest {
         category1.setId(null);
         assertThat(category1).isNotEqualTo(category2);
     }
+
+    @Test
+    void failIt() {
+        assertTru(false);
+    }
 }
